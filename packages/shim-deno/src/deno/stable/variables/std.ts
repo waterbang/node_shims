@@ -74,9 +74,9 @@ export const stdout: typeof Deno.stdout = {
   get writable(): WritableStream<Uint8Array> {
     throw new Error("Not implemented.");
   },
-  writeSync() {
-    // Node.js doesn't support writeSync for stdout
-    throw new Error("Not implemented");
+  writeSync(p) {
+    process.stdout.write(p);
+    return p.length
   },
   close() {
     process.stdout.destroy();
